@@ -1,6 +1,7 @@
 #ifndef AVL_H_INCLUDED
 #define AVL_H_INCLUDED
 
+#include "Lista.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ template <typename T>
 class Avl {
 private:
     NodoArbol<T>* miRaiz;
-    void mostrarEnOrden(NodoArbol<T>* miNodo) const;
+    void mostrarEnOrden(NodoArbol<T>* miNodo,Lista<T>& miLista);
     void agregarRecursivo(NodoArbol<T>*& miNodo, T val1);
     void limpiar(NodoArbol<T>*& miNodo);
     void eliminarNodoRecursivo(NodoArbol<T>*& miNodo, string name);
@@ -29,13 +30,12 @@ private:
 public:
     Avl();
     ~Avl();
-    bool operator==(const T& miEstructura) const;
     void ActualizarAltura(NodoArbol<T>*& miNodo);
     int getAltura(NodoArbol<T>* miNodo) const;
     void agregarAVL(T val1);
     void eliminarNodoAvl(string nameBorrar);
     T* buscarNodo(string nombreBuscar);
-    void mostrar() const;
+    void mostrar(Lista<T>& miLista) ;
 };
 
 #endif

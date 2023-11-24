@@ -13,6 +13,7 @@ using namespace std;
 int main(){
     //Constructor
     Agenda miAgenda;
+    Lista<Contact> miLista;
 
     //CrearContactos
     Contact contacto1("Bautista", "123-456-7890", "juan@example.com", "Calle 123", "1990-05-15", "Empresa A", "Analista", "Amigo", "@bautistaAnalista");
@@ -45,7 +46,7 @@ int main(){
     miAgenda.agregarContacto(contacto12);
 
     //MostrarContactos
-    miAgenda.mostrarContactos();
+    miAgenda.mostrarContactos(miLista);
 
     //BuscarContacto (existente)
     miAgenda.buscarContacto("Luisa");
@@ -62,7 +63,7 @@ int main(){
     miAgenda.buscarContacto("Luisa");
 
     //MostrarContactos (post-borrar)
-    miAgenda.mostrarContactos();
+    miAgenda.mostrarContactos(miLista);
 
 
     return 0;

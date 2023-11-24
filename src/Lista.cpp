@@ -7,6 +7,11 @@ template <typename T>
 Lista<T>::Lista() : cabeza(nullptr) {}
 
 
+template <typename T>
+Lista<T>& Lista<T>::operator=(const NodoLista<T>* miNewNodo) {
+    return *this;
+}
+
 // template <typename T>
 // Lista<T>::~Lista() {
 //         while (cabeza) {
@@ -17,7 +22,7 @@ Lista<T>::Lista() : cabeza(nullptr) {}
 // }
 
 template <typename T>
-NodoLista<T>*& Lista<T>::obtenerCabeza(){ //hay doble Lista porque Nodo esta dentro de la Lista y obtenerCabeza tambien
+NodoLista<T>* Lista<T>::obtenerCabeza() const{ //hay doble Lista porque Nodo esta dentro de la Lista y obtenerCabeza tambien
     return cabeza;
 }
 

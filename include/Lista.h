@@ -18,13 +18,16 @@ private:
 
 public:
 
-    NodoLista<T>*& obtenerCabeza();
+    NodoLista<T>* obtenerCabeza() const;
 
     Lista();
+
+    Lista<T>& operator=(const NodoLista<T>* miNewNodo);
 
     // ~Lista();
 
     void agregarElemento(T elemento);
+    
 
     void mostrarLista() const;
 

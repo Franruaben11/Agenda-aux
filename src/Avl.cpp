@@ -168,13 +168,6 @@ void Avl<T>::ordenarConDif(NodoArbol<T>*& miNodo, int dif,T val){
 
 
 template <typename T>
-bool Avl<T>::operator==(const T& miDato) const {
-    return (miRaiz != nullptr) && (miRaiz->dato.getNombre() == miDato.getNombre());
-}
-
-
-
-template <typename T>
 void Avl<T> ::limpiar(NodoArbol<T>*& miNodo){
     if (miNodo!=nullptr){
         limpiar(miNodo->min);
@@ -242,17 +235,24 @@ void Avl<T>::agregarRecursivo(NodoArbol<T>*& miNodo, T val) {
 
 
 template <typename T>
-void Avl<T>::mostrar() const{
-    mostrarEnOrden(miRaiz);
+void Avl<T>::mostrar(Lista<T>& miLista){
+    mostrarEnOrden(miRaiz, miLista);
 }
 
 
 template <typename T>
-void Avl<T>::mostrarEnOrden(NodoArbol<T>* miNodo) const{
-    if (miNodo!=nullptr){
-        cout << "El valor es " << miNodo->dato.getNombre() << " " << "y la altura es " << miNodo->height<<endl;
+void Avl<T>::mostrarEnOrden(NodoArbol<T>* miNodo, Lista<T>& miLista) {
+    if (miNodo != nullptr) {
+        // Crear un nuevo nodo de lista y asignarle el valor del nodo del árbol
+        NodoLista<T>* miNewNodo = new NodoLista<T>;
+        miNewNodo->dato = miNodo->dato;
 
-        mostrarEnOrden(miNodo->min);
-        mostrarEnOrden(miNodo->max);
+        // Agregar el nuevo nodo a la lista
+        miLista.agregarElemento(miNewNodo->dato);
+
+        // Recursivamente, mostrar en orden los nodos del árbol
+        mostrarEnOrden(miNodo->min, miLista);
+        mostrarEnOrden(miNodo->max, miLista);
     }
 }
+
