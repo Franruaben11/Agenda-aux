@@ -14,25 +14,32 @@ Avl<T> ::~Avl() {
     limpiar(miRaiz);
 }
 
-template <typename T>
-T* Avl<T> ::buscarNodo(string miNombre){
-    return busquedaRecursiva(miRaiz,miNombre);
-}
+// template <typename T>
+// T* Avl<T> ::buscarNodo(string miNombre){
+//     return busquedaRecursiva(miRaiz,miNombre);
+// }
+
+
+// template <typename T>
+// T* Avl<T>::busquedaRecursiva(NodoArbol<T>* miNodo, string miNombre) const {
+//     if (miNodo != nullptr) {
+//         if (miNodo->dato.getNombre() == miNombre) {
+//             return &(miNodo->dato);  // Devuelve el puntero del Contact
+//         } else if (miNodo->dato.getNombre() > miNombre) {
+//             return busquedaRecursiva(miNodo->min, miNombre);
+//         } else {
+//             return busquedaRecursiva(miNodo->max, miNombre);
+//         }
+//     }
+//     return nullptr;  // Devuelve nullptr si no se encuentra el nodo.
+// }
 
 
 template <typename T>
-T* Avl<T>::busquedaRecursiva(NodoArbol<T>* miNodo, string miNombre) const {
-    if (miNodo != nullptr) {
-        if (miNodo->dato.getNombre() == miNombre) {
-            return &(miNodo->dato);  // Devuelve el puntero del Contact
-        } else if (miNodo->dato.getNombre() > miNombre) {
-            return busquedaRecursiva(miNodo->min, miNombre);
-        } else {
-            return busquedaRecursiva(miNodo->max, miNombre);
-        }
-    }
-    return nullptr;  // Devuelve nullptr si no se encuentra el nodo.
+NodoArbol<T>* Avl<T>::getCabeza(){
+    return miRaiz;
 }
+
 
 
 template <typename T>
@@ -215,7 +222,7 @@ void Avl<T>::agregarRecursivo(NodoArbol<T>*& miNodo, T val) {
         miNodo->min = nullptr;
         miNodo->height = 1;
     } else {
-        if (miNodo->dato.getNombre() > val.getNombre()) {
+        if (esMayor(miNodo,val)) {
             agregarRecursivo(miNodo->min, val);
         } else {
             agregarRecursivo(miNodo->max, val);

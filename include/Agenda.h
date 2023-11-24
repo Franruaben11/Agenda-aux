@@ -11,6 +11,7 @@ private:
     Avl<Contact> miAgenda;
     void datosUser(Contact* miUser)const;
     void mostrarRecursivo(const Lista<Contact>& miLista)const;
+    void buscarContactoRecursivo(const string& name, NodoArbol<Contact>* miNodo);
 
 public:
     Agenda();

@@ -30,6 +30,7 @@ private:
 public:
     Avl();
     ~Avl();
+    NodoArbol<T>* getCabeza();
     void ActualizarAltura(NodoArbol<T>*& miNodo);
     int getAltura(NodoArbol<T>* miNodo) const;
     void agregarAVL(T val1);

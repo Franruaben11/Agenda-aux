@@ -13,14 +13,8 @@ void Agenda::mostrarContactos(Lista<Contact> miLista){
 
 void Agenda::mostrarRecursivo(const Lista<Contact>& miLista) const{
     NodoLista<Contact>* actual = miLista.obtenerCabeza();
-
-    // Base de la recursión: si el nodo actual es nulo, terminar la recursión
     while (actual != nullptr) {
-        // Mostrar información del contacto
         cout << "Nombre: " << actual->dato.getNombre() << ", " << "Teléfono: " << actual->dato.getNroTelefono() << endl;
-        // ... (mostrar otros detalles del contacto)
-
-        // Mover al siguiente nodo
         actual = actual->siguiente;
     }
 }
@@ -34,16 +28,33 @@ void Agenda::eliminarContacto(const string& name){
 
 void Agenda::buscarContacto(const string& name){
     if (name!=""){
-    Contact* miNodo = miAgenda.buscarNodo(name);
-    cout<< endl;
-    if (miNodo != nullptr) {
-        datosUser(miNodo);
+        NodoArbol<Contact>* miNodo = miAgenda.getCabeza();
         cout<< endl;
+        buscarContactoRecursivo(name,miNodo);
+    }
+}
+
+bool esMayor(NodoArbol<Contact>*& miNodo, Contact val) {
+    if (miNodo->dato.getNombre() > val.getNombre()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void Agenda::buscarContactoRecursivo(const string& name, NodoArbol<Contact>* miNodo){
+    if (miNodo){
+        if (miNodo->dato.getNombre() == name){
+            datosUser(&(miNodo->dato)); //direccion de memoria(puntero)
+        } else if (miNodo->dato.getNombre() > name) {
+            return buscarContactoRecursivo(name, miNodo->min);
+        } else {
+            return buscarContactoRecursivo(name, miNodo->max);
+        }
         
     } else {
         cout<< "EL CONTACTO NO FUE ENCONTRADO" << endl;
         cout<< endl;
-    }
     }
 }
 
