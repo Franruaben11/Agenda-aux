@@ -16,6 +16,10 @@ private:
 public:
     Agenda();
     ~Agenda();
+    bool esMayorContact(NodoArbol<Contact>*& miNodo, Contact val);
+    bool esMayorString(NodoArbol<Contact>*& miNodo, string val);
+    bool esIgualContact(NodoArbol<Contact>*& miNodo, Contact val);
+    bool esIgualString(NodoArbol<Contact>*& miNodo, string val);
     void agregarContacto(const Contact& miContacto);
     void mostrarContactos(Lista<Contact> miLista);
     void eliminarContacto(const string& miName);

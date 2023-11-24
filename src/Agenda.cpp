@@ -34,13 +34,39 @@ void Agenda::buscarContacto(const string& name){
     }
 }
 
-bool esMayor(NodoArbol<Contact>*& miNodo, Contact val) {
+bool Agenda::esMayorContact(NodoArbol<Contact>*& miNodo, Contact val) {
     if (miNodo->dato.getNombre() > val.getNombre()) {
         return true;
     } else {
         return false;
     }
 }
+
+bool Agenda::esMayorString(NodoArbol<Contact>*& miNodo, string val) {
+    if (miNodo->dato.getNombre() > val) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+bool Agenda::esIgualContact(NodoArbol<Contact>*& miNodo, Contact val) {
+    if (miNodo->dato.getNombre() == val.getNombre()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Agenda::esIgualString(NodoArbol<Contact>*& miNodo, string val) {
+    if (miNodo->dato.getNombre() == val) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 void Agenda::buscarContactoRecursivo(const string& name, NodoArbol<Contact>* miNodo){
     if (miNodo){

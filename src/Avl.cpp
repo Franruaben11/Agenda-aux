@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../include/Avl.h"
+#include "../include/Agenda.h"
 
 using namespace std;
 
@@ -13,27 +14,6 @@ template <typename T>
 Avl<T> ::~Avl() {
     limpiar(miRaiz);
 }
-
-// template <typename T>
-// T* Avl<T> ::buscarNodo(string miNombre){
-//     return busquedaRecursiva(miRaiz,miNombre);
-// }
-
-
-// template <typename T>
-// T* Avl<T>::busquedaRecursiva(NodoArbol<T>* miNodo, string miNombre) const {
-//     if (miNodo != nullptr) {
-//         if (miNodo->dato.getNombre() == miNombre) {
-//             return &(miNodo->dato);  // Devuelve el puntero del Contact
-//         } else if (miNodo->dato.getNombre() > miNombre) {
-//             return busquedaRecursiva(miNodo->min, miNombre);
-//         } else {
-//             return busquedaRecursiva(miNodo->max, miNombre);
-//         }
-//     }
-//     return nullptr;  // Devuelve nullptr si no se encuentra el nodo.
-// }
-
 
 template <typename T>
 NodoArbol<T>* Avl<T>::getCabeza(){
@@ -52,17 +32,17 @@ template <typename T>
 void Avl<T>::eliminarNodoRecursivo(NodoArbol<T>*& miNodo, string miDato) {
     if (miNodo == nullptr) {
         return;
-    } else if (miDato < miNodo->dato.getNombre()) {
+    } else if (Agenda().esIgualString(miNodo,miDato)==false && Agenda().esMayorString(miNodo,miDato)) {
         eliminarNodoRecursivo(miNodo->min, miDato);
-    } else if (miDato > miNodo->dato.getNombre()) {
+    } else if (Agenda().esIgualString(miNodo,miDato)==false && Agenda().esMayorString(miNodo,miDato)==false) {
         eliminarNodoRecursivo(miNodo->max, miDato);
-    } else {
+    } else if (Agenda().esIgualString(miNodo,miDato)) {
         // Nodo encontrado para eliminar
         if (miNodo->min != nullptr && miNodo->max != nullptr) {
             // Nodo con dos hijos
             NodoArbol<T>* sucesor = buscarMenorDeLasMayores(miNodo->max);
             miNodo->dato = sucesor->dato;
-            eliminarNodoRecursivo(miNodo->max, sucesor->dato.getNombre());
+            eliminarNodoRecursivo(miNodo->max, miDato); //SOLO FALTO ESTE ULTIMO PASO 
         } else {
             // Nodo con uno o cero hijos
             NodoArbol<T>* temp = miNodo;
@@ -222,7 +202,7 @@ void Avl<T>::agregarRecursivo(NodoArbol<T>*& miNodo, T val) {
         miNodo->min = nullptr;
         miNodo->height = 1;
     } else {
-        if (esMayor(miNodo,val)) {
+        if (Agenda().esMayorContact(miNodo,val)) {
             agregarRecursivo(miNodo->min, val);
         } else {
             agregarRecursivo(miNodo->max, val);
